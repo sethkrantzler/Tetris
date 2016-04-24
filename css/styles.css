@@ -1,0 +1,66 @@
+h1 {
+    font-family: 'Amatic SC', cursive;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 180px;
+    color: black;
+    margin-top: 0px;
+    margin-bottom: 50px;
+
+
+}
+
+h3 {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 36px;
+  color: black;
+
+}
+
+body
+{
+	background-color:#FFF;
+}
+
+#gameboard
+{
+	background-color:#8a8a8a;
+	width:320px;
+	height:480px;
+	margin:0 auto;
+	border: 4px solid #80e5ff;
+  border-radius: 4px
+}
+
+
+#score
+{
+	font-size: 18pt;
+	font-family: sans-serif, verdana;
+	color: #000;
+	width: 320px;
+	margin: 0 auto;
+}
+
+#directions p
+{
+	font-size: 14pt;
+	font-family: sans-serif, verdana;
+	color: #fefefe;
+	width: 320px;
+	margin: 0 auto;
+}
+
+h2 {
+    font-family:'Russo One', sans-serif;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 64px;
+    color: black;
+    text-shadow:
+    -1px -1px 0 #80e5ff,
+    1px -1px 0 #80e5ff,
+    -1px 1px 0 #80e5ff,
+    1px 1px 0 #80e5ff;
+
+}
