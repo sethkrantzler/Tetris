@@ -13,24 +13,23 @@
   <div style='position:relative;padding-bottom:0px'><iframe src='https://gfycat.com/ifr/IdioticHappyGenet' frameborder='0' scrolling='no' width="800px" height="520px" margin style='position:relative;top:0px;left:220px;' allowfullscreen></iframe></div>
 <div align="center">
   <h1>Seth Krantzler</h1>
-  <h3>Welcome to my personal website.
-    Here you can check out some of the projects I've worked on,
-    check out my resume or find my contact info.</h3>
-</div>
-<h2 align="center">Seth's <img width= 16% src="https://s-media-cache-ak0.pinimg.com/736x/ce/f9/7d/cef97dac44f89093d4ddf106d4b1b503.jpg"/> Clone</h1>
 <div id="gameboard">
-  <canvas id="gameCanvas" width=320px height=480px></canvas>
+  <canvas id="gameCanvas" width=320px height=512px></canvas>
 </div>
 
 <div id="score">
-  <p> Lines: <span id='lines'></span></p>
-  <p> Score: <span id='gamescore'></span></p>
+	<p>Lines: <span id="line"></span></p>
 </div>
+
+<div id="scores">
+  <p>Score: <span id="gamescore"></span></p>
+</div>
+
 
 <script type="text/javascript" src="js/pieces.js"></script>
 <script type="text/javascript" src="js/BulkImageLoader.js"></script>
 <script type="text/javascript">
-var ROWS = 15;
+var ROWS = 16;
 var COLS = 10;
 var SIZE = 32;
 
@@ -50,6 +49,8 @@ var curLines;
 var touchX;
 var touchY;
 var touchId;
+var curScore;
+var scoreSpan;
 
 window.onload = onReady;
 
@@ -63,11 +64,67 @@ function onReady() {
 
 	canvas = document.getElementById('gameCanvas');
 	ctx = canvas.getContext('2d');
-	lineSpan = document.getElementById('lines');
+	lineSpan = document.getElementById('line');
+  scoreSpan = document.getElementById('scores');
 
 	prevTime = curTime = 0;
 
 	document.onkeydown = getInput;
+}
+
+function getInput(e)
+{
+  if(!e) { var e = window.event;}
+
+  e.preventDefault();
+
+  if (isGameOver != true)
+  {
+    switch(e.keyCode)
+    {
+      case 37:
+      {
+        if (checkMove(curPiece.gridx-1, curPiece.gridy, curPiece.curState))
+        {
+          curPiece.gridx--
+        }
+      }
+      break;
+      case 38:
+      {
+        var newState = curPiece.curState - 1;
+        if (newState < 0)
+        {
+          newState = curPiece.states.length - 1;
+        }
+        if (checkMove(curPiece.gridx, curPiece.gridy, newState))
+        {
+          curPiece.curState = newState
+        }
+      }
+      break;
+      case 39:
+      {
+        if (checkMove(curPiece.gridx+1, curPiece.gridy, curPiece.curState))
+        {
+          curPiece.gridx++
+        }
+      }
+      break;
+      case 40:
+      {
+        if (checkMove(curPiece.gridx, curPiece.gridy + 1, curPiece.curState))
+          {
+            curPiece.gridy++;
+          }
+      }
+      break;
+    }
+  }
+  else
+    {
+      initGame();
+    }
 }
 
 function onImagesLoaded(e) {
@@ -101,8 +158,9 @@ function initGame() {
 	}
 
 	curPiece = getRandomPiece();
+  lineSpan.innerHTML = curLines.toString();
 
-	lineSpan.innerHTML = curLines.toString();
+
 
 	var requestAnimFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
 							window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;

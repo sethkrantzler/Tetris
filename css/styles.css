@@ -26,7 +26,7 @@ body
 {
 	background-color:#8a8a8a;
 	width:320px;
-	height:480px;
+	height:512px;
 	margin:0 auto;
 	border: 4px solid #80e5ff;
   border-radius: 4px
@@ -37,10 +37,28 @@ body
 {
 	font-size: 18pt;
 	font-family: sans-serif, verdana;
+  position: relative;
+  align: left;
+  top: -110px;
+  left: -350px;
 	color: #000;
 	width: 320px;
 	margin: 0 auto;
 }
+
+#scores
+{
+	font-size: 18pt;
+	font-family: sans-serif, verdana;
+  position: relative;
+  align: left;
+  top: -110px;
+  left: -360px;
+	color: #000;
+	width: 320px;
+	margin: 0 auto;
+}
+
 
 #directions p
 {
