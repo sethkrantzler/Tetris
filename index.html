@@ -51,6 +51,7 @@ var touchY;
 var touchId;
 var curScore;
 var scoreSpan;
+var USERid;
 
 window.onload = onReady;
 
@@ -203,6 +204,7 @@ function update() {
 	}
 	else {
 		ctx.drawImage(gameOverImg, 0, 0, 320, 640, 0, 0, 320, 640);
+    USERid = prompt("What name should we use for your high score?");
   }
 }
 
