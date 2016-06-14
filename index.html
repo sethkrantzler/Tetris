@@ -65,7 +65,7 @@ function onReady() {
 	canvas = document.getElementById('gameCanvas');
 	ctx = canvas.getContext('2d');
 	lineSpan = document.getElementById('line');
-  scoreSpan = document.getElementById('scores');
+  scoreSpan = document.getElementById('gamescore');
 
 	prevTime = curTime = 0;
 
@@ -137,6 +137,7 @@ function onImagesLoaded(e) {
 function initGame() {
 	var r, c;
 	curLines = 0;
+  curScore = 0;
 	isGameOver = false;
 
 	if(gameData == undefined) {
@@ -159,6 +160,7 @@ function initGame() {
 
 	curPiece = getRandomPiece();
   lineSpan.innerHTML = curLines.toString();
+  scoreSpan.innerHTML = curScore.toString();
 
 
 
@@ -171,9 +173,12 @@ function initGame() {
 }
 
 function update() {
+
 	curTime = new Date().getTime();
 
 	if(curTime - prevTime > 500) {
+    curScore += 1;
+    scoreSpan.innerHTML = curScore.toString();
 		// update the game piece
 		if( checkMove(curPiece.gridx, curPiece.gridy + 1, curPiece.curState)) {
 			curPiece.gridy += 1;
@@ -181,6 +186,8 @@ function update() {
 		else {
 			copyData(curPiece);
 			curPiece = getRandomPiece();
+      curScore += 10;
+      scoreSpan.innerHTML = curScore.toString();
 		}
 
 		// update time
@@ -222,6 +229,7 @@ function copyData(p) {
 	if(p.gridy < 0) {
 		isGameOver = true;
 	}
+
 }
 
 
@@ -245,6 +253,7 @@ function checkLines() {
 			r++;
 			lineFound = true;
 			curLines++;
+      curScore=curScore+1000;
 		}
 
 		fullRow = true;
@@ -254,6 +263,7 @@ function checkLines() {
 
 	if(lineFound) {
 		lineSpan.innerHTML = curLines.toString();
+    scoreSpan.innerHTML = curScore.toString();
 	}
 }
 
@@ -337,7 +347,9 @@ function checkMove(xpos, ypos, newState) {
 			r = len;
 			result = false;
 		}
+
 	}
+
 
 	return result;
 }
